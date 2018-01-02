@@ -65,3 +65,15 @@ end
 
 # test for StandardAtmos()
 # (temp, press, rho) = StandardAtmos(0)
+
+
+
+dz = 0.001 # km
+altitudes = 0:dz:86
+rho = StandardAtmos(altitudes)[3]
+rho_kg_km3 = rho*1e9
+masses = rho_kg_km3*dz
+totalMass = sum(masses)
+
+neededVol = totalMass*510e6/rho_kg_km3[1] # km3
+sphereRadius = (neededVol/(4/3*π))^(1/3) # km
